@@ -1,0 +1,110 @@
+/* Yıldız = sayfadaki istisnasız her eleman. Tarayıcıların hazır boşluklarını sıfırlamak için kullanılır */
+* {
+  margin: 0;               /* elemanın DIŞINDAKİ boşluk; tarayıcı p ve h1'e kendiliğinden verir, sıfırlayınca kontrol bizde olur */
+  padding: 0;              /* elemanın İÇİNDEKİ boşluk: kenarlık ile yazı arası */
+  box-sizing: border-box;  /* genişlik hesabı: 100px dersen iç boşluk+kenarlık dahil 100px olur, yoksa üstüne eklenip tasarım kayar */
+}
+
+/* Etiket seçici: nokta veya diyez yok, doğrudan etiket adı — sayfadaki tüm body'ye uygulanır */
+body {
+  margin: 50px 70px 0 70px;           /* dört değer saat yönünde: üst, sağ, alt, sol */
+  padding: 0;
+  font-family: "Manrope", sans-serif; /* yazı tipi; Manrope yüklenemezse sistemin çizgisiz fontuna düşer */
+  color: #111111;                     /* yazı rengi; içteki elemanlara miras geçer, tek tek yazmaya gerek kalmaz */
+}
+
+header {
+  margin: 0 0 40px 0;   /* sadece alttan 40px: şapkayı içerikten ayırır */
+  padding: 0;
+}
+
+h1 {
+  font-size: 44px;      /* harflerin boyutu */
+  font-weight: 800;     /* harflerin kalınlığı: 400 normal, 700 bold, 800 daha kalın */
+  color: #000000;       /* onaltılık renk: ilk iki hane kırmızı, sonraki ikisi yeşil, son ikisi mavi */
+  margin-bottom: 50px;  /* başlık ile menü arasındaki mesafe */
+}
+
+nav {
+  margin: 0;
+  padding: 0;
+}
+
+/* Aradaki boşluk "içindeki" demek: sadece nav'ın içindeki linkler. Footer'daki link bundan etkilenmez */
+nav a {
+  font-family: "Manrope", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #000000;
+  text-decoration: none;  /* tarayıcı linkleri varsayılan olarak altı çizili gösterir, bu onu kaldırır */
+  margin-right: 24px;     /* menü maddelerini birbirinden ayırır */
+}
+
+/* :hover = fare üzerine geldiği andaki hâli. Kullanıcıya "burası tıklanabilir" hissini verir */
+nav a:hover {
+  color: #ff6b4a;
+}
+
+main {
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  margin-bottom: 40px;  /* her bölümün altına aynı boşluk: sayfa düzenli görünür */
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 20px;  /* başlık ile altındaki içeriği ayırır */
+}
+
+/* Virgül: aynı kuralı iki seçiciye birden uygular, kodu iki kez yazmaktan kurtarır */
+p,
+li {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+img {
+  width: 1120px;        /* resmin ekranda kaplayacağı genişlik */
+  height: 747px;        /* yüksekliği; ikisi birlikte maketteki oranı korur, resim ezilmez */
+  margin-bottom: 20px;
+}
+
+ul {
+  margin-left: 24px;    /* listeyi sağa kaydırır, yoksa madde noktaları sayfanın kenarına taşar */
+}
+
+table {
+  border: 1px solid #000000;  /* kenarlık üç değer alır: kalınlık, çizgi tipi, renk */
+  border-collapse: collapse;  /* komşu hücrelerin çizgilerini tek çizgide birleştirir; olmazsa her hücre kendi çizgisini çizer ve aralar çift görünür */
+}
+
+th,
+td {
+  padding: 16px 20px;         /* iki değer: ilki üst-alt, ikincisi sağ-sol. Yazı kenarlığa yapışmaz */
+  border: 1px solid #000000;  /* her hücrenin kendi kenarlığı — tablo ızgara gibi görünür */
+  text-align: center;         /* yazıyı hücrenin ortasına hizalar */
+  font-size: 18px;
+}
+
+footer {
+  margin: 60px -70px 0 -70px;  /* eksi değer elemanı dışarı taşırır: body'nin 70px boşluğunu iptal eder, footer kenardan kenara uzanır */
+  padding: 30px 70px;          /* iç boşluk; siyah zemin yazının etrafında nefes alır */
+  background-color: black;     /* arka plan rengi */
+  color: white;                /* siyah zeminde okunabilirlik için beyaz yazı */
+}
+
+footer a {
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+  color: white;           /* link de beyaz: koyu zeminde varsayılan mavi okunmaz */
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #ff6b4a;
+}

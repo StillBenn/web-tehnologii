@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- Tarayıcıya "bu belge HTML5" der. Yazılmazsa tarayıcı eski uyumluluk moduna geçer, CSS bozulur -->
+<html lang="ru">
+<!-- Bütün sayfayı saran kök etiket. lang="ru" = içerik Rusça; arama motoru ve ekran okuyucu buna bakar -->
+
+<head>
+  <!-- Sayfanın ayar bölümü: buradakiler ekranda görünmez, tarayıcıya talimat verir -->
+
+  <meta charset="UTF-8">
+  <!-- Harflerin hangi tabloya göre çözüleceğini söyler. UTF-8 Kiril'i kapsar; olmazsa Rusça harfler soru işareti çıkar -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Sayfanın genişliğini ekran genişliğine eşitler. Olmazsa telefon sayfayı uzaktan gösterir, yazılar okunmaz -->
+
+  <title>Food Construct</title>
+  <!-- Sekmede ve Google sonuçlarında görünen isim. Sayfanın içinde görünmez -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Font sunucusuyla el sıkışmayı önceden yapar, böylece font birkaç yüz milisaniye erken gelir -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&display=swap" rel="stylesheet">
+  <!-- Manrope fontunu Google'dan indirir. wght@400;500;800 = sadece bu üç kalınlığı indir (hepsini indirmek yavaşlatır) -->
+
+  <link rel="stylesheet" href="styles/style.css">
+  <!-- Dış dosyayı sayfaya bağlar. rel = dosyanın türü (stil dosyası), href = dosyanın yeri -->
+</head>
+
+<body>
+  <!-- Kullanıcının ekranda gördüğü her şey buranın içinde olmak zorunda -->
+
+  <header>
+    <!-- Sayfanın üst şeridi. div yerine bunu kullanırız çünkü tarayıcıya "burası giriş bölümü" bilgisini de verir -->
+    <h1>Food Construct</h1>
+    <!-- Sayfanın ana başlığı. Arama motoru sayfanın konusunu buradan anlar, bu yüzden sayfada tek olmalı -->
+    <nav>
+      <!-- Menü bağlantılarının kutusu. Ekran okuyucu "gezinme bölümü" diye tanıtır ve istenirse atlanabilir -->
+      <a href="index.html">О нас</a>
+      <!-- Tıklanınca href'teki adrese götürür. href olmadan link çalışmaz, düz yazı olur -->
+      <a href="lunch.html">Собрать ланч</a>
+      <a href="orders.html">Заказы</a>
+      <a href="#contacts">Контакты</a>
+      <!-- # ile başlayan adres başka sayfaya gitmez: aynı sayfada id="contacts" olan elemana kaydırır -->
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sayfanın asıl içeriği. Menü ve footer buraya girmez; sayfada bir tane olur -->
+
+    <section>
+      <!-- İçeriği anlamlı parçalara böler: her section kendi başlığıyla tek bir konuyu anlatır -->
+      <img src="images/lunch.jpg" alt="Бизнес-ланчи Food Construct">
+      <!-- src resmi getirir. alt = resim yüklenmezse yerine çıkan yazı; görme engelli okuyucusu da bunu okur -->
+      <h2>О нас</h2>
+      <!-- Bölüm başlığı. Başlıklar h1'den h6'ya sırayla iner, atlanmaz — yapı bozulur -->
+      <p>
+        <!-- Paragraf. Tarayıcı kendiliğinden alt satıra geçirir ve araya boşluk koyar -->
+        Food Construct - доставка бизнес-ланчей в Москве. Мы привезем вам горячую вкусную еду
+        в любую точку города к назначенному времени.
+      </p>
+    </section>
+
+    <section>
+      <h2>Преимущества Food Construct</h2>
+      <ul>
+        <!-- Sırası önemli olmayan liste. Tarayıcı her maddenin başına nokta koyar -->
+        <li>Привозим обед к назначенному времени без опозданий</li>
+        <!-- Listenin tek bir maddesi. Sadece ul veya ol içinde kullanılabilir -->
+        <li>Надежно упаковываем блюда в удобные контейнеры бесплатно</li>
+        <li>Доставляем ланчи весь день с 7:00 до 23:00</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Топ-5 популярных блюд</h2>
+      <table>
+        <!-- Satır-sütun hâlindeki veriler için. Sayfayı hizalamak amacıyla kullanılmaz, o iş CSS'in -->
+        <tr>
+          <!-- Tablonun bir satırını açar; hücreler bunun içine yazılır -->
+          <th></th>
+          <!-- Başlık hücresi: tarayıcı kalın ve ortalı gösterir, ayrıca "bu sütunun adı" bilgisini taşır -->
+          <th>Название</th>
+          <th>Кол-во заказов<br>в неделю</th>
+          <!-- Metni tam o noktadan alt satıra indirir; boşluk açmak için değil, satır kırmak için -->
+          <th>Цена</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <!-- Veri hücresi: tablonun asıl içeriği buraya yazılır -->
+          <td>Лазанья</td>
+          <td>185</td>
+          <td>385₽</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Том Ям с креветками</td>
+          <td>161</td>
+          <td>365₽</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Норвежский суп</td>
+          <td>144</td>
+          <td>270₽</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Жареная картошка с грибами</td>
+          <td>132</td>
+          <td>150₽</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Котлеты из курицы<br>с картофельным пюре</td>
+          <td>128</td>
+          <td>225₽</td>
+        </tr>
+      </table>
+    </section>
+
+  </main>
+
+  <footer id="contacts">
+    <!-- Sayfanın alt şeridi (iletişim, telif). id = bu elemana verilen benzersiz isim; menüdeki #contacts bunu arar -->
+    <p>Позвонить нам <a href="tel:+70000000000">+7-000-000-00-00</a></p>
+    <!-- tel: yazınca telefonda tıklayan kişi doğrudan arama ekranına gider; bilgisayarda bir şey olmaz -->
+  </footer>
+
+</body>
+
+</html>
