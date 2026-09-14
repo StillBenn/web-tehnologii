@@ -6,9 +6,9 @@
 
 | № | Тема | Исходный код | Страница |
 |---|---|---|---|
-| 1 | Food Construct — главная страница | [lab-01-food-construct](lab-01-food-construct) | [открыть](https://stillbenn.github.io/web-tehnologii/lab-01-food-construct/) |
-| 2 | Вёрстка сеток: flexbox, grid, media-запросы | [lab-02-lunch](lab-02-lunch) | [открыть](https://stillbenn.github.io/web-tehnologii/lab-02-lunch/) |
-| 3 | Работа с формами, HTTP | [lab-03-form](lab-03-form) | [открыть](https://stillbenn.github.io/web-tehnologii/lab-03-form/lunch.html) |
+| 1 | Food Construct — главная страница | [lab-01-food-construct](lab-01-food-construct) | [открыть](https://larisel.com/web-tehnologii/lab-01-food-construct/) |
+| 2 | Вёрстка сеток: flexbox, grid, media-запросы | [lab-02-lunch](lab-02-lunch) | [открыть](https://larisel.com/web-tehnologii/lab-02-lunch/) |
+| 3 | Работа с формами, HTTP | [lab-03-form](lab-03-form) | [открыть](https://larisel.com/web-tehnologii/lab-03-form/lunch.html) |
 
 ## Лабораторная работа 1 — Food Construct
 
