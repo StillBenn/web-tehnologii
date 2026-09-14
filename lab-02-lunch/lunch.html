@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!-- Tarayıcıya "bu belge HTML5" der. Yazılmazsa tarayıcı eski uyumluluk moduna geçer, CSS bozulur -->
+<html lang="ru">
+<!-- Bütün sayfayı saran kök etiket. lang="ru" = içerik Rusça; arama motoru ve ekran okuyucu buna bakar -->
+
+<head>
+  <!-- Sayfanın ayar bölümü: buradakiler ekranda görünmez, tarayıcıya talimat verir -->
+
+  <meta charset="UTF-8">
+  <!-- Harflerin hangi tabloya göre çözüleceğini söyler. UTF-8 Kiril'i kapsar; olmazsa Rusça harfler soru işareti çıkar -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Ödevin şartı: sayfa genişliği = ekran genişliği. Bu satır olmazsa telefon sayfayı 980px varsayıp
+       uzaktan gösterir ve @media kuralları hiç çalışmaz, yani uyarlanabilirlik (адаптивность) çöker -->
+
+  <title>Собрать ланч — Food Construct</title>
+  <!-- Sekmede ve Google sonuçlarında görünen isim. Her sayfanın kendine ait olmalı -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Font sunucusuyla el sıkışmayı önceden yapar, böylece font birkaç yüz milisaniye erken gelir -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&display=swap" rel="stylesheet">
+  <!-- Ana sayfadaki Manrope fontunun aynısı. Ödev "aynı fontu bağla" diyor: site tek parça görünsün -->
+
+  <link rel="stylesheet" href="styles/style.css">
+  <!-- Ana sayfanın ortak stilleri: renk, font, şapka, menü, footer. İki sayfa da bunu paylaşır -->
+
+  <link rel="stylesheet" href="styles/lunch.css">
+  <!-- Sadece bu sayfaya ait ek stil dosyası (ödevin şartı). Sıra önemli: sonra gelen dosya
+       aynı özelliği yeniden tanımlarsa öncekini ezer -->
+</head>
+
+<body>
+  <!-- Kullanıcının ekranda gördüğü her şey buranın içinde olmak zorunda -->
+
+  <header>
+    <!-- Sayfanın üst şeridi. div yerine bunu kullanırız çünkü tarayıcıya "burası giriş bölümü" bilgisini de verir -->
+    <h1>Food Construct</h1>
+    <!-- Sayfanın ana başlığı. Arama motoru sayfanın konusunu buradan anlar, bu yüzden sayfada tek olmalı -->
+    <nav>
+      <!-- Menü bağlantılarının kutusu. Ekran okuyucu "gezinme bölümü" diye tanıtır ve istenirse atlanabilir -->
+      <a href="index.html">О нас</a>
+      <!-- Çapraz bağlantı: bu sayfadan ana sayfaya dönüş. Ödevin şartı -->
+      <a href="lunch.html" id="active">Собрать ланч</a>
+      <!-- id = sayfada yalnızca bir kez kullanılabilen benzersiz isim. CSS'te #active ile yakalayıp
+           bulunduğumuz sayfayı renklendiriyoruz; kullanıcı nerede olduğunu böyle anlar -->
+      <a href="orders.html">Заказы</a>
+      <a href="#contacts">Контакты</a>
+      <!-- # ile başlayan adres başka sayfaya gitmez: aynı sayfada id="contacts" olan elemana kaydırır -->
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sayfanın asıl içeriği. Menü ve footer buraya girmez; sayfada bir tane olur -->
+
+    <section>
+      <!-- Çorbalar bölümü. Her section kendi başlığıyla tek bir konuyu anlatır -->
+      <h2>Выберите суп</h2>
+      <!-- Bölüm başlığı. h1'den sonra h2 gelir, sıra atlanmaz — yoksa belgenin yapısı bozulur -->
+
+      <div class="dishes">
+        <!-- Bütün yemekleri saran kutu. class = aynı stili birden çok elemana vermek için kullanılan isim
+             (id'den farkı: id sayfada tek olmalı, class tekrar edebilir).
+             CSS'te bu kutuyu Grid'e çevirip 3 sütunlu ızgara yapıyoruz -->
+
+        <div class="dish">
+          <!-- Tek bir yemeğin kartı. CSS'te Flex olacak: içindekiler alt alta dizilecek -->
+          <img src="images/soup-gazpacho.jpg" alt="Гаспачо">
+          <!-- src resmi getirir. alt = resim yüklenmezse yerine çıkan yazı; görme engelli okuyucusu da bunu okur -->
+          <p class="price">195₽</p>
+          <!-- Fiyat. Sınıf verdik çünkü üç p etiketi de aynı; hangisinin fiyat olduğunu CSS'e böyle söylüyoruz -->
+          <p class="name">Гаспачо</p>
+          <!-- Yemeğin adı -->
+          <p class="weight">350 г</p>
+          <!-- Ağırlık/hacim. CSS'te gri renk verilecek ve düğmeyi aşağı iten eleman bu olacak -->
+          <button type="button">Добавить</button>
+          <!-- Tıklanabilir düğme. type="button" yazmazsak tarayıcı onu "submit" sayar ve bir form
+               içindeyse sayfayı göndermeye çalışır; burada böyle bir iş yok, o yüzden açıkça belirtiyoruz -->
+        </div>
+
+        <div class="dish">
+          <img src="images/soup-mushroom.jpg" alt="Грибной суп-пюре">
+          <p class="price">185₽</p>
+          <p class="name">Грибной суп-пюре</p>
+          <p class="weight">330 г</p>
+          <button type="button">Добавить</button>
+        </div>
+
+        <div class="dish">
+          <img src="images/soup-norwegian.jpg" alt="Норвежский суп">
+          <p class="price">270₽</p>
+          <p class="name">Норвежский суп</p>
+          <p class="weight">330 г</p>
+          <button type="button">Добавить</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <!-- Ana yemekler bölümü. Yapısı çorbalarla birebir aynı: ödev "aynı içerik" diyor -->
+      <h2>Выберите главное блюдо</h2>
+
+      <div class="dishes">
+        <div class="dish">
+          <img src="images/main-potatoes.jpg" alt="Жареная картошка с грибами">
+          <p class="price">150₽</p>
+          <p class="name">Жареная картошка с грибами</p>
+          <p class="weight">250 г</p>
+          <button type="button">Добавить</button>
+        </div>
+
+        <div class="dish">
+          <img src="images/main-lasagna.jpg" alt="Лазанья">
+          <p class="price">385₽</p>
+          <p class="name">Лазанья</p>
+          <p class="weight">310 г</p>
+          <button type="button">Добавить</button>
+        </div>
+
+        <div class="dish">
+          <img src="images/main-cutlets.jpg" alt="Котлеты из курицы с картофельным пюре">
+          <p class="price">225₽</p>
+          <p class="name">Котлеты из курицы с картофельным пюре</p>
+          <!-- Bu isim iki satıra taşıyor. Ödevin özel şartı: buna rağmen ağırlık ve düğme
+               diğer kartlarla aynı hizada kalmalı. Bunu CSS'te margin-top: auto ile çözüyoruz -->
+          <p class="weight">280 г</p>
+          <button type="button">Добавить</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <!-- İçecekler bölümü -->
+      <h2>Выберите напиток</h2>
+
+      <div class="dishes">
+        <div class="dish">
+          <img src="images/drink-orange.jpg" alt="Апельсиновый сок">
+          <p class="price">120₽</p>
+          <p class="name">Апельсиновый сок</p>
+          <p class="weight">300 мл</p>
+          <button type="button">Добавить</button>
+        </div>
+
+        <div class="dish">
+          <img src="images/drink-apple.jpg" alt="Яблочный сок">
+          <p class="price">90₽</p>
+          <p class="name">Яблочный сок</p>
+          <p class="weight">300 мл</p>
+          <button type="button">Добавить</button>
+        </div>
+
+        <div class="dish">
+          <img src="images/drink-carrot.jpg" alt="Морковный сок">
+          <p class="price">110₽</p>
+          <p class="name">Морковный сок</p>
+          <p class="weight">300 мл</p>
+          <button type="button">Добавить</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="contacts">
+    <!-- Sayfanın alt şeridi (iletişim). id = bu elemana verilen benzersiz isim; menüdeki #contacts bunu arar -->
+    <p>Позвонить нам <a href="tel:+70000000000">+7-000-000-00-00</a></p>
+    <!-- tel: yazınca telefonda tıklayan kişi doğrudan arama ekranına gider; bilgisayarda bir şey olmaz -->
+  </footer>
+
+</body>
+
+</html>
