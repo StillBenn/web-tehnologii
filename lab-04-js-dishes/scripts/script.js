@@ -40,9 +40,10 @@ function createDishCard(dish) {
 
   card.append(image, price, name, weight, button); // Parçaları karta bu sırayla ekler (sıra maketle aynı)
 
-  // Kartın herhangi bir yerine tıklayınca yemek seçilir (ödev: "при клике на карточку")
+  // Kartın herhangi bir yerine tıklayınca yemek seçilir (ödev: "при клике на карточку").
+  // Nesneyi doğrudan vermiyoruz: karttaki data-dish okunuyor, yemek diziden bununla bulunuyor (ödev şartı)
   card.addEventListener('click', function () {
-    selectDish(dish);
+    selectDish(card.dataset.dish);
   });
 
   return card;
@@ -68,7 +69,10 @@ function renderDishes() {
 // ----- 2. Yemek seçme ve "Ваш заказ" bloğu -----
 
 // Tıklanan yemeği kendi kategorisine yazar; aynı kategoriden ikinci seçim öncekinin yerine geçer
-function selectDish(dish) {
+function selectDish(keyword) {
+  // data-dish'teki Latin adı dizideki keyword ile karşılaştırıp yemeği buluyoruz.
+  // find: koşulu sağlayan İLK nesneyi döndürür; keyword benzersiz olduğu için tek sonuç var
+  const dish = dishes.find(function (item) { return item.keyword === keyword; });
   order[dish.category] = dish;
   updateOrder();
 }
