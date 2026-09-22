@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!-- Tarayıcıya "bu belge HTML5" der. Yazılmazsa tarayıcı eski uyumluluk moduna geçer, CSS bozulur -->
+<html lang="ru">
+<!-- Bütün sayfayı saran kök etiket. lang="ru" = içerik Rusça; arama motoru ve ekran okuyucu buna bakar -->
+
+<head>
+  <!-- Sayfanın ayar bölümü: buradakiler ekranda görünmez, tarayıcıya talimat verir -->
+
+  <meta charset="UTF-8">
+  <!-- Harflerin hangi tabloya göre çözüleceğini söyler. UTF-8 Kiril'i kapsar; olmazsa Rusça harfler soru işareti çıkar -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Ödevin şartı: sayfa genişliği = ekran genişliği. Bu satır olmazsa telefon sayfayı 980px varsayıp
+       uzaktan gösterir ve @media kuralları hiç çalışmaz, yani uyarlanabilirlik (адаптивность) çöker -->
+
+  <title>Собрать ланч — Food Construct</title>
+  <!-- Sekmede ve Google sonuçlarında görünen isim. Her sayfanın kendine ait olmalı -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Font sunucusuyla el sıkışmayı önceden yapar, böylece font birkaç yüz milisaniye erken gelir -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&display=swap" rel="stylesheet">
+  <!-- Ana sayfadaki Manrope fontunun aynısı. Ödev "aynı fontu bağla" diyor: site tek parça görünsün -->
+
+  <link rel="stylesheet" href="styles/style.css">
+  <!-- Ana sayfanın ortak stilleri: renk, font, şapka, menü, footer. İki sayfa da bunu paylaşır -->
+
+  <link rel="stylesheet" href="styles/lunch.css">
+  <!-- Sadece bu sayfaya ait ek stil dosyası (ödevin şartı). Sıra önemli: sonra gelen dosya
+       aynı özelliği yeniden tanımlarsa öncekini ezer -->
+</head>
+
+<body>
+  <!-- Kullanıcının ekranda gördüğü her şey buranın içinde olmak zorunda -->
+
+  <header>
+    <!-- Sayfanın üst şeridi. div yerine bunu kullanırız çünkü tarayıcıya "burası giriş bölümü" bilgisini de verir -->
+    <h1>Food Construct</h1>
+    <!-- Sayfanın ana başlığı. Arama motoru sayfanın konusunu buradan anlar, bu yüzden sayfada tek olmalı -->
+    <nav>
+      <!-- Menü bağlantılarının kutusu. Ekran okuyucu "gezinme bölümü" diye tanıtır ve istenirse atlanabilir -->
+      <a href="index.html">О нас</a>
+      <!-- Çapraz bağlantı: bu sayfadan ana sayfaya dönüş. Ödevin şartı -->
+      <a href="lunch.html" id="active">Собрать ланч</a>
+      <!-- id = sayfada yalnızca bir kez kullanılabilen benzersiz isim. CSS'te #active ile yakalayıp
+           bulunduğumuz sayfayı renklendiriyoruz; kullanıcı nerede olduğunu böyle anlar -->
+      <a href="orders.html">Заказы</a>
+      <a href="#contacts">Контакты</a>
+      <!-- # ile başlayan adres başka sayfaya gitmez: aynı sayfada id="contacts" olan elemana kaydırır -->
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sayfanın asıl içeriği. Menü ve footer buraya girmez; sayfada bir tane olur -->
+
+    <section>
+      <!-- Çorbalar bölümü. Her section kendi başlığıyla tek bir konuyu anlatır -->
+      <h2>Выберите суп</h2>
+      <!-- Bölüm başlığı. h1'den sonra h2 gelir, sıra atlanmaz — yoksa belgenin yapısı bozulur -->
+
+      <div class="dishes" data-category="soup"></div>
+      <!-- Ödevin şartı: kartlar HTML'de yok, kapsayıcı boş. script.js diziden bu kategorinin
+           yemeklerini süzüp kartları buraya kendisi ekliyor. data-category = süzme anahtarı -->
+    </section>
+
+    <section>
+      <!-- Ana yemekler bölümü. Yapısı çorbalarla birebir aynı: ödev "aynı içerik" diyor -->
+      <h2>Выберите главное блюдо</h2>
+
+      <div class="dishes" data-category="main-course"></div>
+    </section>
+
+    <section>
+      <!-- İçecekler bölümü -->
+      <h2>Выберите напиток</h2>
+
+      <div class="dishes" data-category="drink"></div>
+    </section>
+
+  </main>
+
+  <section class="order">
+    <!-- ÖDEVİN ŞARTI: form, main bloğunun BİTİMİNDEN SONRA gelecek.
+         Bu bölüm iki şeyden oluşuyor: bölümün başlığı ve formun kendisi -->
+    <h2>Сделать заказ</h2>
+
+    <form action="https://httpbin.org/post" method="post">
+      <!-- action = verilerin gönderileceği adres. method = gönderim yöntemi.
+           POST: veriler isteğin gövdesinde, gizli şekilde gider (GET olsaydı adres çubuğunda görünürdü
+           ve uzunluk sınırı olurdu). Ödev açıkça POST istiyor.
+           Gönderince httpbin.org bize yolladığımız her değeri geri gösterir — böylece
+           formun doğru çalıştığını kanıtlamış oluruz -->
+
+      <div class="order-block">
+        <!-- BİRİNCİ BLOK: müşterinin siparişi -->
+        <h3>Ваш заказ</h3>
+
+        <div class="order-summary">
+          <!-- Bu blok JavaScript ile doluyor: script.js hangi satırın görüneceğine karar veriyor.
+               HTML'de hepsi yazılı, JS sadece gösterip gizliyor ve isimleri yerleştiriyor -->
+          <p class="nothing">Ничего не выбрано</p>
+          <!-- Hiç yemek seçilmemişken görünen tek satır (maket 3). Seçim olunca gizleniyor -->
+          <div class="chosen" data-category="soup" data-empty="Блюдо не выбрано">
+            <!-- data-category: script hangi kategorinin satırı olduğunu buradan anlıyor.
+                 data-empty: bu kategoride seçim yokken yazılacak mesaj (ödevde iki farklı metin var) -->
+            <p class="chosen-title">Суп</p>
+            <p class="chosen-dish"></p>
+            <!-- Boş bırakılıyor; script "Гаспачо 195₽" ya da "Блюдо не выбрано" yazıyor -->
+          </div>
+          <div class="chosen" data-category="main-course" data-empty="Блюдо не выбрано">
+            <p class="chosen-title">Главное блюдо</p>
+            <p class="chosen-dish"></p>
+          </div>
+          <div class="chosen" data-category="drink" data-empty="Напиток не выбран">
+            <p class="chosen-title">Напиток</p>
+            <p class="chosen-dish"></p>
+          </div>
+          <div class="chosen total">
+            <!-- Seçili yemeklerin toplamı. Hiç seçim yoksa kategorilerle birlikte gizli -->
+            <p class="chosen-title">Стоимость заказа</p>
+            <p class="chosen-price"></p>
+          </div>
+        </div>
+        <input type="hidden" name="soup">
+        <!-- Gizli alan: ekranda görünmez ama formla birlikte gider. script seçili yemeğin
+             keyword'ünü buraya yazıyor; böylece sipariş sunucuya da ulaşıyor -->
+        <input type="hidden" name="main-course">
+        <input type="hidden" name="drink">
+        <label for="comment">Комментарии к заказу</label>
+        <textarea id="comment" name="comment"></textarea>
+        <!-- textarea = çok satırlı yazı alanı. input'tan farkı: kullanıcı alt alta yazabilir.
+             Kapanış etiketi zorunludur ve içine varsayılan metin yazılmaz (boş bırakıyoruz) -->
+      </div>
+
+      <div class="customer-block">
+        <!-- İKİNCİ BLOK: müşterinin bilgileri -->
+        <h3>Ваши данные</h3>
+
+        <label for="name">Имя</label>
+        <input type="text" id="name" name="name" required>
+        <!-- type="text" = sıradan tek satırlık yazı alanı. required = zorunlu alan -->
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <!-- type="email" = tarayıcı içeriğin e-posta biçiminde (@ işareti vb.) olduğunu KENDİ kontrol eder;
+             yanlışsa formu göndermez. Telefonda da @ tuşlu klavye açılır -->
+
+        <div class="checkbox-row">
+          <!-- Onay kutusu ile yazısını yan yana tutmak için sardık -->
+          <input type="checkbox" id="subscribe" name="subscribe" value="yes" checked>
+          <!-- type="checkbox" = işaretlenebilir kutu.
+               checked = sayfa açıldığında İŞARETLİ gelsin (ödevin şartı).
+               Dikkat: işaretli değilse bu alan sunucuya HİÇ gönderilmez, bu normaldir -->
+          <label for="subscribe">Получать информацию о скидках и акциях</label>
+          <!-- Onay kutusunda label'ı sağa koymak alışılmış düzendir; bağlantı yine for/id ile -->
+        </div>
+
+        <label for="phone">Номер телефона</label>
+        <input type="tel" id="phone" name="phone" required>
+        <!-- type="tel" = telefon alanı. Telefonlarda rakam klavyesi açılır.
+             Not: ülkeden ülkeye biçim değiştiği için tarayıcı içeriği doğrulamaz, sadece zorunluluğu kontrol eder -->
+
+        <label for="address">Адрес доставки</label>
+        <input type="text" id="address" name="address" required>
+
+        <p class="hint">Доставка осуществляется только по Москве</p>
+        <!-- Kullanıcıyı bilgilendiren küçük not; forma veri göndermez, sadece açıklamadır -->
+
+        <p class="radio-title">Время доставки:</p>
+        <!-- Ödevin şartı: seçim düğmelerinin üstünde açıklayıcı bir yazı olacak -->
+
+        <div class="radio-row">
+          <input type="radio" id="asap" name="delivery-time" value="asap" required>
+          <!-- type="radio" = birbirini dışlayan seçenekler: aynı name'e sahip olanlardan
+               yalnızca BİRİ seçilebilir. Bu yüzden ikisinin de name'i "delivery-time".
+               required grubun tamamı için geçerlidir: hiçbiri seçilmezse form gönderilmez -->
+          <label for="asap">Как можно скорее</label>
+        </div>
+
+        <div class="radio-row">
+          <input type="radio" id="exact" name="delivery-time" value="exact">
+          <label for="exact">К указанному времени</label>
+        </div>
+
+        <label for="delivery-hour">Укажите время доставки</label>
+        <input type="time" id="delivery-hour" name="delivery-hour" min="07:00" max="23:00" step="300">
+        <!-- type="time" = saat seçici; tarayıcı kendi saat arayüzünü açar.
+             min/max = izin verilen en erken ve en geç saat (ödev: 07:00 - 23:00).
+             step = seçilebilen aralık, SANİYE cinsindendir. 5 dakika = 5 x 60 = 300.
+             Bu sayede kullanıcı 12:07 gibi bir saat seçemez, sadece 12:05 / 12:10 seçebilir -->
+
+        <p class="hint">Доступное время доставки с 7:00 до 23:00</p>
+
+        <div class="buttons">
+          <button type="reset">Сбросить</button>
+          <!-- type="reset" = bütün alanları başlangıç hâline döndürür (temizler).
+               Bunu JavaScript yazmadan tarayıcı kendisi yapar -->
+          <button type="submit">Отправить</button>
+          <!-- type="submit" = formu action'daki adrese gönderir.
+               Göndermeden önce tarayıcı required alanları kontrol eder; eksik varsa uyarı gösterir -->
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <footer id="contacts">
+    <!-- Sayfanın alt şeridi (iletişim). id = bu elemana verilen benzersiz isim; menüdeki #contacts bunu arar -->
+    <p>Позвонить нам <a href="tel:+70000000000">+7-000-000-00-00</a></p>
+    <!-- tel: yazınca telefonda tıklayan kişi doğrudan arama ekranına gider; bilgisayarda bir şey olmaz -->
+  </footer>
+
+  <script src="scripts/dishes.js"></script>
+  <!-- Önce dizi: script.js "dishes" değişkenini kullanıyor, o yüzden bu dosya üstte olmak zorunda -->
+  <script src="scripts/script.js"></script>
+  <!-- Script'ler body'nin SONUNDA: yukarıdaki bütün etiketler çoktan oluşmuş oluyor,
+       querySelector boş dönmüyor. head'e koysaydık .dishes henüz yokken çalışırdı -->
+</body>
+
+</html>
