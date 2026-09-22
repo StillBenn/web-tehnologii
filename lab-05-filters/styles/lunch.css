@@ -1,0 +1,313 @@
+/* SADECE «Собрать ланч» SAYFASININ STİLLERİ
+   Ödevin şartı: ana sayfanın ortak stilleri (style.css) bağlı kalacak,
+   bu sayfaya özel kurallar ayrı bir dosyada olacak. */
+
+/* Bütün yemekleri saran kutu (section > div).
+   ÖDEVİN ŞARTI: setka (ızgara) Grid ile kurulacak */
+.dishes {
+  display: grid;                          /* kutuyu ızgaraya çevirir: içindekiler satır/sütun düzenine girer */
+  grid-template-columns: 1fr 1fr 1fr;     /* 3 sütun. fr = "fraction", boş yerin payı demektir.
+                                             1fr 1fr 1fr = kalan genişliği üçe eşit böl.
+                                             px yazsaydık ekran daralınca taşardı; fr her ekrana uyar */
+  gap: 10px;                              /* ızgara hücreleri ARASINDAKİ boşluk (hem satır hem sütun arası) */
+}
+
+/* Tek bir yemeğin kartı (section > div > div).
+   ÖDEVİN ŞARTI: kart içi dizilim Flex ile ve dikey olacak */
+.filters {
+  display: flex;                /* Düğmeler yan yana, makette tek satır */
+  gap: 10px;
+  flex-wrap: wrap;              /* Dar ekranda alt satıra kaysın, taşmasın */
+  margin-bottom: 20px;
+}
+
+.filters button {
+  background: none;             /* Makette düğme değil metin gibi duruyor: zemin ve kenarlık yok */
+  border: none;
+  padding: 4px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  color: #ff6b4a;               /* Sitenin tek vurgu rengi; makette yeşil ama biz ЛР1'den beri bu tonu kullanıyoruz */
+}
+
+.filters button:hover {
+  text-decoration: underline;   /* Üzerine gelince tıklanabilir olduğu anlaşılsın */
+}
+
+.filters button.active {
+  background-color: #ffe4dd;    /* Seçili filtre: açık zemin — makette açık yeşil kapsül, bizde açık turuncu */
+  text-decoration: none;
+}
+
+.dish {
+  display: flex;                /* kartı esnek kutuya çevirir */
+  flex-direction: column;       /* içindekiler (resim, fiyat, ad, ağırlık, düğme) alt alta dizilsin */
+
+  padding: 30px 40px;           /* iç boşluk: iki değer = üst-alt 30px, sağ-sol 40px (ödevde böyle isteniyor) */
+  border-radius: 35px;          /* köşe yuvarlaklığı; değer büyüdükçe köşe daha yuvarlak olur */
+  cursor: pointer;              /* fare imleci kartın üzerinde "el" şekline girsin: tıklanabilir hissi verir */
+  filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+  /* Gölge. Değerler sırayla: sağa kaydırma, aşağı kaydırma, bulanıklık, renk.
+     rgba'daki son sayı (0.13) saydamlıktır: 0 tamamen görünmez, 1 tamamen opak.
+     box-shadow yerine filter kullanıyoruz çünkü ödev bunu istiyor; farkı, gölgeyi
+     kutunun değil elemanın gerçek şeklinin etrafına çizmesidir */
+  background-color: white;      /* kartın arka planı beyaz olsun ki gölge ve sayfa zemininden ayrışsın */
+
+  border: 2px solid transparent;
+  /* Şeffaf kenarlık. Neden? Aşağıda fare üzerine gelince 2px kenarlık ekliyoruz.
+     Burada baştan yer ayırmazsak, kenarlık belirdiği anda kart 4px büyür ve
+     bütün ızgara oynar (göze çarpan bir titreme olur). Böyle yapınca sadece renk değişir */
+}
+
+/* :hover = fare kartın üzerindeyken.
+   ÖDEVİN ŞARTI: kartın etrafında 2px kalınlığında düz kenarlık belirsin */
+.dish:hover {
+  border: 2px solid #ff6b4a;    /* üç değer: kalınlık, çizgi tipi (solid = düz), renk */
+}
+
+/* BAĞLAMSAL SEÇİCİ (контекстный селектор) — ödevin özellikle istediği yöntem.
+   Aradaki boşluk "içindeki" demektir: ".dish:hover button" = üzerine gelinen kartın İÇİNDEKİ düğme.
+   Yani düğmenin kendisine dokunmadan, sadece kart hover olunca düğmenin rengini değiştiriyoruz */
+.dish:hover button {
+  background-color: #ff6b4a;
+  color: white;                 /* turuncu zeminde siyah yazı zor okunur, beyaza çeviriyoruz */
+}
+
+/* Kartın içindeki resim (section > div > div > img) */
+.dish img {
+  width: 100%;                  /* ÖDEVİN ŞARTI: resim kapsayıcının tüm genişliğine yayılsın.
+                                   %100 = içinde bulunduğu kutunun genişliği kadar */
+  height: auto;                 /* yükseklik orana göre kendiliğinden hesaplansın, resim ezilmesin */
+  border-radius: 35px;          /* resmin köşeleri de kart gibi yuvarlak olsun */
+}
+
+/* Fiyat yazısı — ödev "yazı boyutunu büyüt" diyor (ortak stilde p = 18px) */
+.dish .price {
+  font-size: 22px;
+  font-weight: 800;             /* kalın: fiyat karttaki en dikkat çeken bilgi */
+  margin-top: 16px;             /* resim ile fiyat arasını açar */
+}
+
+/* Yemeğin adı — ödev "yazı boyutunu büyüt" diyor */
+.dish .name {
+  font-size: 20px;
+  margin-top: 6px;
+}
+
+/* Ağırlık/hacim — ödev "yazı rengini griye çevir" diyor */
+.dish .weight {
+  color: gray;                  /* gri: ikincil bilgi olduğu için öne çıkmasın */
+  margin-top: auto;
+  /* BURASI ÖDEVİN PÜF NOKTASI.
+     auto = "kalan boş yerin tamamını bu boşluğa ver".
+     Flex sütununda bir elemana margin-top: auto verirsen, o eleman ve altındakiler
+     kutunun en altına itilir. Sonuç: yemeğin adı iki satır olsa bile (örn. «Котлеты из курицы
+     с картофельным пюре») ağırlık ve «Добавить» düğmesi bütün kartlarda aynı hizada kalır.
+     Bu satır olmasaydı uzun isimli kartta düğme aşağı kayardı ve satır bozuk görünürdü */
+  padding-top: 16px;            /* itilen bloğun üstündeki yazıya yapışmaması için */
+}
+
+/* «Добавить» düğmesi (section > div > div > button) */
+.dish button {
+  background-color: #f1eee9;    /* ödevde verilen bej ton */
+  margin-top: 16px;             /* ÖDEVİN ŞARTI: düğmenin üstünde mutlaka boşluk olacak */
+  padding: 10px 30px;           /* iç boşluk: üst-alt 10px, sağ-sol 30px */
+  border-radius: 10px;          /* köşeleri hafif yuvarlak */
+  cursor: pointer;              /* imleç "el" olsun */
+  border: none;                 /* tarayıcı düğmelere kendiliğinden gri bir kenarlık verir, onu kaldırıyoruz */
+  font-family: "Manrope", sans-serif;  /* düğmeler fontu sayfadan miras ALMAZ, tek tek yazmak gerekir */
+  font-size: 18px;
+  color: #111111;
+}
+
+/* ===================================================================
+   UYARLANABİLİRLİK — «Собрать ланч» sayfasına özel
+   =================================================================== */
+
+/* --- TABLETLER: 800px ve altı --- */
+@media (max-width: 800px) {
+
+  .dishes {
+    grid-template-columns: 1fr 1fr;   /* ödevin şartı: sütun sayısı 3'ten 2'ye insin.
+                                         Kartlar dar ekranda ezilmesin diye */
+  }
+}
+
+/* --- TELEFONLAR: 600px ve altı --- */
+@media (max-width: 600px) {
+
+  section h2 {
+    text-align: center;               /* ödevin şartı: bölüm başlıkları ortalansın */
+  }
+
+  .dishes {
+    grid-template-columns: 1fr;       /* ödevin şartı: tek sütun — kartlar alt alta dizilir */
+  }
+}
+
+/* ===================================================================
+   SİPARİŞ FORMU (LABORATUVAR 3)
+   Ödevin şartı: maketi olabildiğince birebir tekrarlamak —
+   sütunlara ayırma, yazı boyutları, alanların genişlik/yükseklikleri, düğme stili
+   =================================================================== */
+
+/* Formu saran bölüm */
+.order {
+  margin-bottom: 40px;
+}
+
+/* Bölüm başlığı «Сделать заказ» — makette ortada duruyor */
+.order h2 {
+  text-align: center;
+}
+
+/* Formun kendisi: iki blok yan yana dursun */
+.order form {
+  display: flex;                /* esnek kutu: iki blok yan yana dizilir */
+  justify-content: center;      /* ana eksende (yatay) ortala: form sayfanın ortasında dursun */
+  gap: 80px;                    /* iki sütun arasındaki boşluk */
+  flex-wrap: wrap;              /* ekran darsa bloklar alt alta geçebilsin, taşmasın */
+}
+
+/* İki blok da aynı genişlikte olsun ki makette olduğu gibi hizalı görünsünler */
+.order-block,
+.customer-block {
+  display: flex;
+  flex-direction: column;       /* etiket-alan çiftleri alt alta dizilsin */
+  width: 300px;                 /* sabit genişlik: iki sütun eşit olur */
+}
+
+/* Blok başlıkları «Ваш заказ» / «Ваши данные» */
+.order-summary {
+  margin-bottom: 20px;          /* Özetle yorum alanı arasına nefes payı */
+}
+
+.chosen {
+  margin-bottom: 16px;          /* Maketteki gibi kategori satırları arasında boşluk */
+}
+
+.nothing,
+.chosen-title {
+  font-size: 16px;
+  font-weight: 800;             /* Kategori adı ve "Ничего не выбрано" kalın — maketle aynı */
+}
+
+.chosen-dish {
+  font-size: 16px;              /* Yemek adı + fiyat normal kalınlıkta, başlığın hemen altında */
+}
+
+.chosen-price {
+  font-size: 22px;              /* Toplam tutar makette diğerlerinden büyük yazılmış */
+}
+
+.order form h3 {
+  font-size: 20px;
+  font-weight: 500;             /* h2'den ince: alt başlık olduğu belli olsun */
+  margin-bottom: 20px;
+}
+
+/* Alanların üstündeki açıklamalar */
+.order form label {
+  font-size: 16px;
+  margin-bottom: 6px;           /* etiket ile alanı birbirine yakın tutar */
+}
+
+/* Açılır listeler ve tek satırlık alanlar — ödev genişlik ve yükseklik istiyor */
+.order form select,
+.order form input[type="text"],
+.order form input[type="email"],
+.order form input[type="tel"],
+.order form input[type="time"] {
+  /* Köşeli parantez = öznitelik seçici: input'ların sadece belirtilen type'ta olanlarını yakalar.
+     Böylece aynı kural onay kutusuna ve seçim düğmesine uygulanmaz (onlar küçük kalmalı) */
+  width: 100%;                  /* kapsayıcı 300px olduğu için alanlar da 300px olur */
+  height: 36px;                 /* maketteki alan yüksekliği */
+  margin-bottom: 18px;          /* bir sonraki etikete kadar boşluk */
+  padding: 0 10px;              /* yazı kenarlığa yapışmasın */
+  border: 1px solid gray;       /* ince gri çerçeve */
+  border-radius: 5px;
+  font-family: "Manrope", sans-serif;  /* form elemanları fontu sayfadan miras ALMAZ, yazmak gerekir */
+  font-size: 16px;
+  color: #111111;
+  background-color: white;
+}
+
+/* Çok satırlı yorum alanı */
+.order form textarea {
+  width: 100%;
+  height: 90px;                 /* birkaç satır yazacak kadar yüksek */
+  margin-bottom: 18px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  color: #111111;
+  background-color: white;
+  resize: vertical;             /* kullanıcı sadece dikey büyütebilsin; yatayda büyütürse düzen bozulur */
+}
+
+/* Onay kutusu ve seçim düğmesi satırları: kutu ile yazısı yan yana dursun */
+.checkbox-row,
+.radio-row {
+  display: flex;
+  align-items: center;          /* yardımcı eksende ortala: kutu ile yazı aynı hizada olsun */
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* Bu satırlarda etiketin alt boşluğu gereksiz, sıfırlıyoruz */
+.checkbox-row label,
+.radio-row label {
+  margin-bottom: 0;
+}
+
+/* Seçim düğmelerinin üstündeki «Время доставки:» yazısı */
+.radio-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Küçük bilgilendirme notları */
+.hint {
+  font-size: 14px;              /* diğer yazılardan küçük: ikincil bilgi */
+  font-style: italic;           /* eğik yazı: açıklama olduğu anlaşılsın */
+  color: gray;
+  margin-bottom: 18px;
+}
+
+/* İki düğmeyi yan yana koyan satır */
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* «Сбросить» ve «Отправить» düğmeleri */
+.order form button {
+  padding: 10px 24px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: #f1eee9;    /* karttaki düğmelerle aynı bej ton: site tek parça görünsün */
+  cursor: pointer;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  color: #111111;
+}
+
+/* Düğmenin üzerine gelince renk değişsin: tıklanabilir olduğu belli olur */
+.order form button:hover {
+  background-color: #ff6b4a;
+  color: white;
+}
+
+/* Dar ekranda iki sütun yan yana sığmaz; alt alta geçsinler ve genişliği ekrana uydursunlar */
+@media (max-width: 800px) {
+
+  .order-block,
+  .customer-block {
+    width: 100%;
+  }
+}
