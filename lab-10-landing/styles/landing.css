@@ -1,0 +1,30 @@
+/* Sadece Bootstrap'in kendi sınıflarıyla yapılamayan üç şey: sitenin fontu, turuncu vurgu, ikon boyutu */
+
+/* Bootstrap bütün yazıları bu değişkenden alır; değiştirince sayfanın tamamı Manrope olur */
+:root {
+  --bs-body-font-family: "Manrope", sans-serif;
+}
+
+/* Menü linklerinin üzerine gelince diğer sayfalardaki gibi turuncu olsun */
+.navbar {
+  --bs-navbar-hover-color: #ff6b4a;
+}
+
+/* Koyu ve açık düğmelerin hover rengi: sitenin turuncusu. Bootstrap düğmeleri renklerini bu değişkenlerden alır */
+.btn-dark,
+.btn-light {
+  --bs-btn-hover-bg: #ff6b4a;
+  --bs-btn-hover-border-color: #ff6b4a;
+  --bs-btn-hover-color: #ffffff;
+}
+
+/* Turuncu vurgu: iletişim ikonları. Düz yazıda kullanmıyoruz — beyaz zeminde turuncu yazı zor okunur */
+.accent-text {
+  color: #ff6b4a;
+}
+
+/* Avantaj kartlarındaki ikonlar: Bootstrap Icons bir yazı tipi, bu yüzden boyutu font-size ile veriliyor */
+.feature-icon {
+  font-size: 40px;
+  color: #ff6b4a;
+}

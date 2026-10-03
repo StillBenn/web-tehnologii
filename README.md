@@ -12,6 +12,7 @@
 | 4 | Отображение и сортировка блюд, добавление в корзину | [lab-04-js-dishes](lab-04-js-dishes) | [открыть](https://larisel.com/web-tehnologii/lab-04-js-dishes/lunch.html) |
 | 5 | Добавление категорий и фильтров | [lab-05-filters](lab-05-filters) | [открыть](https://larisel.com/web-tehnologii/lab-05-filters/lunch.html) |
 | 6 | Проверка данных на стороне клиента. Уведомления | [lab-06-validation](lab-06-validation) | [открыть](https://larisel.com/web-tehnologii/lab-06-validation/lunch.html) |
+| 10 | Адаптивный лендинг на Bootstrap 5 | [lab-10-landing](lab-10-landing) | [открыть](https://larisel.com/web-tehnologii/lab-10-landing/landing.html) |
 
 ## Лабораторная работа 1 — Food Construct
 
@@ -95,6 +96,19 @@
 | `lunch.html` | блок «Доступные для заказа комбо» |
 | `styles/lunch.css` | сетка комбо, `transform` для иконок, стили уведомления |
 | `images/icons/` | иконки блюд |
+
+## Лабораторная работа 10 — Лендинг на Bootstrap 5
+
+Страница-лендинг компании, свёрстанная на Bootstrap 5 и его сетке. Четыре блока:
+hero с названием, описанием и фотографией; четыре карточки с преимуществами;
+тёмный блок с призывом собрать ланч и ссылкой на «Собрать ланч»; форма обратной
+связи и контакты. На телефоне меню сворачивается в кнопку, колонки выстраиваются
+в один столбец; от 576 px карточки идут по две, от 992 px — по четыре.
+
+| Файл | Назначение |
+|---|---|
+| `landing.html` | разметка лендинга на классах Bootstrap |
+| `styles/landing.css` | шрифт сайта, оранжевый цвет при наведении, размер иконок |
 
 ---
 

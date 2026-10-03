@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap'in telefona uyumu buna bağlı: bu satır olmazsa telefon sayfayı masaüstü genişliğinde küçültüp gösterir -->
+
+  <title>Food Construct — доставка бизнес-ланчей</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&display=swap" rel="stylesheet">
+  <!-- Sitenin diğer sayfalarıyla aynı font, landing ayrı bir site gibi durmasın -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <!-- Bootstrap 5'in hazır stilleri. integrity = dosyanın parmak izi: CDN'deki dosya değiştirilirse tarayıcı onu yüklemez -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <!-- Bootstrap Icons: <i class="bi bi-clock"> yazınca saat ikonu çıkar, resim dosyası gerekmez -->
+
+  <link rel="stylesheet" href="styles/landing.css">
+  <!-- Bizim birkaç ek kuralımız. Bootstrap'ten SONRA bağlanıyor ki aynı özellikte bizimki kazansın -->
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-white border-bottom">
+      <!-- navbar = Bootstrap menüsü. navbar-expand-lg: geniş ekranda (≥ 992px) linkler yan yana açık,
+           daha darda "hamburger" düğmesinin arkasına saklanır -->
+      <div class="container">
+        <!-- container = içeriği ortalayıp ekrana göre en fazla genişliği sınırlar; kenarlarda boşluk bırakır -->
+        <a class="navbar-brand fw-bold" href="landing.html">Food Construct</a>
+        <!-- Menünün solundaki şirket adı. fw-bold = kalın yazı (font-weight: 700) -->
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+          aria-controls="menu" aria-expanded="false" aria-label="Открыть меню">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Hamburger düğmesi: sadece dar ekranda görünür. data-bs-target="#menu" hangi bloğu açıp
+             kapatacağını söyler; işi bootstrap.bundle.js yapar, biz JS yazmıyoruz -->
+
+        <div class="collapse navbar-collapse" id="menu">
+          <!-- collapse = dar ekranda kapalı duran, düğmeyle açılan blok -->
+          <ul class="navbar-nav ms-auto">
+            <!-- ms-auto = soldan otomatik boşluk: linkleri menünün sağ kenarına iter -->
+            <li class="nav-item"><a class="nav-link" href="index.html">О нас</a></li>
+            <li class="nav-item"><a class="nav-link" href="lunch.html">Собрать ланч</a></li>
+            <li class="nav-item"><a class="nav-link" href="orders.html">Заказы</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contacts">Контакты</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. HERO: şirket adı, kısa açıklama, dikkat çeken resim -->
+    <section class="py-5">
+      <!-- py-5 = üstten ve alttan büyük iç boşluk (3rem); bloklar birbirine yapışmasın -->
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <!-- row = ızgaranın satırı, içindeki col'ları yan yana dizer. align-items-center = yazı ile resim
+               dikeyde ortalanır. g-5 = sütunlar arası boşluk -->
+          <div class="col-lg-6">
+            <!-- col-lg-6 = geniş ekranda 12 parçalık satırın 6'sı (yarısı); daha darda tam genişlik, resim alta iner -->
+            <h1 class="display-4 fw-bold">Food Construct</h1>
+            <!-- display-4 = Bootstrap'in iri başlık boyutu; ekran daraldıkça kendiliğinden küçülür -->
+            <p class="fs-4 fw-semibold">Доставка бизнес-ланчей по Москве</p>
+            <p class="lead my-4">
+              Привезём горячий обед в любую точку города к назначенному времени. Ланч вы собираете
+              сами: суп, главное блюдо, салат, напиток и десерт — в любом из пяти комбо.
+            </p>
+            <!-- lead = biraz büyük ve ince giriş paragrafı. my-4 = üstten ve alttan dış boşluk -->
+            <div class="d-flex flex-wrap gap-3">
+              <!-- d-flex = flex kutusu; flex-wrap = sığmazsa düğme alt satıra geçer; gap-3 = düğmeler arası boşluk -->
+              <a href="lunch.html" class="btn btn-dark btn-lg">Собрать ланч</a>
+              <a href="#features" class="btn btn-outline-dark btn-lg">Почему мы</a>
+              <!-- btn = linki düğme gibi gösterir. outline = sadece çerçeveli, ikincil eylem olduğu belli olsun -->
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <img src="images/lunch.jpg" alt="Бизнес-ланч Food Construct" class="img-fluid rounded-4 shadow">
+            <!-- img-fluid = resim sütundan taşmaz, telefonda küçülür. rounded-4 = yuvarlak köşe, shadow = gölge -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. AVANTAJLAR -->
+    <section id="features" class="py-5 bg-light">
+      <!-- id sayesinde hero'daki «Почему мы» düğmesi sayfayı buraya kaydırır. bg-light = açık gri zemin -->
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5">Почему выбирают Food Construct</h2>
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-3">
+            <!-- Telefonda 1 sütun, ≥ 576px'te 2 sütun (12'nin 6'sı), ≥ 992px'te 4 sütun (12'nin 3'ü) -->
+            <div class="card h-100 border-0 shadow-sm text-center">
+              <!-- card = kutu bileşeni. h-100 = satırdaki bütün kartlar aynı yükseklikte olsun -->
+              <div class="card-body p-4">
+                <i class="bi bi-clock feature-icon" aria-hidden="true"></i>
+                <!-- aria-hidden: ikon sadece süs, ekran okuyucu onu okumasın -->
+                <h3 class="h5 fw-bold mt-3">Точно ко времени</h3>
+                <p class="mb-0">Привозим обед к назначенному времени без опозданий.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-center">
+              <div class="card-body p-4">
+                <i class="bi bi-sun feature-icon" aria-hidden="true"></i>
+                <h3 class="h5 fw-bold mt-3">С 7:00 до 23:00</h3>
+                <p class="mb-0">Доставляем весь день: как можно скорее или к выбранному времени.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-center">
+              <div class="card-body p-4">
+                <i class="bi bi-box-seam feature-icon" aria-hidden="true"></i>
+                <h3 class="h5 fw-bold mt-3">Удобная упаковка</h3>
+                <p class="mb-0">Бесплатно упаковываем блюда в надёжные контейнеры.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-center">
+              <div class="card-body p-4">
+                <i class="bi bi-grid feature-icon" aria-hidden="true"></i>
+                <h3 class="h5 fw-bold mt-3">Пять комбо</h3>
+                <p class="mb-0">Суп, главное блюдо, салат и напиток в разных сочетаниях, десерт — к любому.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CTA: harekete çağrı ve «Собрать ланч» sayfasına link -->
+    <section class="py-5 bg-dark text-white">
+      <!-- Koyu zemin bloğu sayfanın geri kalanından ayırır, göz düğmeye gider -->
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <h2 class="fw-bold">Проголодались? Соберите ланч за пару минут</h2>
+            <p class="mb-0 fs-5">Выберите блюда из меню — стоимость заказа посчитается сразу.</p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <!-- text-lg-end = geniş ekranda düğme sağa yaslı; telefonda metnin altında solda kalır -->
+            <a href="lunch.html" class="btn btn-light btn-lg">Собрать ланч</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. GERİ BİLDİRİM FORMU + İLETİŞİM -->
+    <section id="contacts" class="py-5">
+      <!-- Menüdeki «Контакты» linki buraya getirir -->
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5">Свяжитесь с нами</h2>
+        <div class="row g-5">
+          <div class="col-lg-7">
+            <h3 class="h4 fw-bold mb-4">Обратная связь</h3>
+            <form action="https://httpbin.org/post" method="post">
+              <!-- ЛР3'teki gibi: veriler test sunucusuna gider, o da gelenleri geri gösterir -->
+              <div class="row g-3">
+                <!-- Formun içinde de ızgara: geniş ekranda ad ve e-posta yan yana, telefonda alt alta -->
+                <div class="col-md-6">
+                  <label for="name" class="form-label">Имя</label>
+                  <input type="text" class="form-control" id="name" name="name" required>
+                  <!-- form-control = alanı tam genişlik ve Bootstrap görünümüyle çizer. label'ın for'u
+                       input'un id'sine bağlı: yazıya tıklayınca alan seçilir -->
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" required>
+                  <!-- type="email" = tarayıcı @ olmayan adresi göndermez; telefonda @'li klavye açılır -->
+                </div>
+                <div class="col-12">
+                  <label for="message" class="form-label">Сообщение</label>
+                  <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-dark btn-lg">Отправить</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-lg-5">
+            <h3 class="h4 fw-bold mb-4">Контакты</h3>
+            <ul class="list-unstyled fs-5">
+              <!-- list-unstyled = madde işaretlerini ve soldaki boşluğu kaldırır -->
+              <li class="mb-3">
+                <i class="bi bi-telephone me-2 accent-text" aria-hidden="true"></i>
+                <a href="tel:+70000000000" class="link-dark">+7-000-000-00-00</a>
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-geo-alt me-2 accent-text" aria-hidden="true"></i>
+                Доставляем по всей Москве
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-clock me-2 accent-text" aria-hidden="true"></i>
+                Ежедневно с 7:00 до 23:00
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-black text-white py-4">
+    <!-- Diğer sayfalardaki gibi siyah footer -->
+    <div class="container">
+      <p class="mb-0">Позвонить нам <a href="tel:+70000000000" class="link-light">+7-000-000-00-00</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <!-- Bootstrap'in JS'i: hamburger menüyü açıp kapatan bu. Sayfanın sonunda, çünkü önce HTML yüklenmeli -->
+</body>
+
+</html>
