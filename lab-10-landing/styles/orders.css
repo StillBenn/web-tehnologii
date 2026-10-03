@@ -1,0 +1,215 @@
+/* «Заказы» sayfası (ЛР9): sipariş tablosu ve modal pencereler. Ortak stiller style.css ve lunch.css'te */
+
+.empty-orders a {
+  color: #ff6b4a;
+}
+
+/* Telefonda tablo sığmazsa sadece bu kutu yana kayar, sayfanın geri kalanı yerinde kalır */
+.table-wrap {
+  overflow-x: auto;
+}
+
+/* ЛР1'deki genel tablo stili her hücreye çerçeve çiziyor; makette sadece yatay çizgiler var */
+.orders-table {
+  width: 100%;
+  border: none;
+  border-collapse: collapse;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 18px 14px;
+  border: none;
+  border-bottom: 1px solid #d9d9d9;   /* satırları ayıran ince yatay çizgi */
+  font-size: 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.orders-table thead th {
+  border-top: 1px solid #d9d9d9;
+  font-weight: 800;
+}
+
+/* «Состав заказа» uzun metin: sola yaslı ve geniş, diğer sütunlar ortalı */
+.orders-table td:nth-child(3) {
+  text-align: left;
+  min-width: 260px;
+}
+
+/* Tarih ve teslimat saati satır sonunda bölünmesin */
+.orders-table td:nth-child(2) {
+  white-space: nowrap;
+}
+
+/* İkon düğmeleri: zemini ve çerçevesi yok, sadece ikon; üzerine gelince turuncu */
+.actions {
+  white-space: nowrap;
+}
+
+.actions button {
+  padding: 4px 6px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  color: #111111;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  color: #ff6b4a;
+}
+
+/* ===== Modal pencereler ===== */
+
+/* dialog'un kendisi: beyaz, yuvarlak köşeli kutu, ekranın ortasında */
+.modal {
+  margin: auto;                   /* tarayıcı dialog'u margin: auto ile ortalıyor; style.css'teki * { margin: 0 }
+                                     bunu sıfırlıyordu ve pencere sol üst köşeye yapışıyordu */
+  width: 520px;
+  max-width: calc(100% - 32px);   /* telefonda ekrandan taşmasın */
+  padding: 0;
+  border: none;
+  border-radius: 16px;
+  font-family: "Manrope", sans-serif;
+  color: #111111;
+}
+
+/* Arkadaki karartma — sadece showModal() ile açılan dialog'da var */
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.modal-small {
+  width: 420px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;   /* başlık solda, çarpı sağda */
+  align-items: center;
+  margin: 0 24px;
+  padding: 22px 0 16px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.modal-header h3 {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.modal-close {
+  border: none;
+  background: none;
+  font-size: 28px;
+  line-height: 1;
+  color: #111111;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #ff6b4a;
+}
+
+.modal-body {
+  padding: 16px 24px;
+  font-size: 16px;
+}
+
+.modal-body h4 {
+  margin: 14px 0 6px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+/* Satır: solda ad, sağda değer ya da alan — iki eşit sütun (maketteki gibi) */
+.modal-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.modal-body input[type="text"],
+.modal-body input[type="tel"],
+.modal-body input[type="email"],
+.modal-body input[type="time"],
+.modal-body textarea {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  color: #111111;
+}
+
+.modal-body textarea {
+  height: 60px;
+  resize: vertical;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.modal-total {
+  margin-top: 14px;
+  font-weight: 800;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;   /* düğmeler sağda */
+  gap: 10px;
+  margin: 0 24px;
+  padding: 16px 0 22px;
+  border-top: 1px solid #d9d9d9;
+}
+
+.modal-button {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f1eee9;   /* sitedeki bej düğme tonu */
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  color: #111111;
+  cursor: pointer;
+}
+
+.modal-button:hover {
+  background-color: #e4ded5;
+}
+
+/* Makette «Сохранить» yeşil, «Да» kırmızı: kalıcı sonucu olan düğmeler renkle ayrılıyor */
+.modal-save {
+  background-color: #2e9e4f;
+  color: white;
+}
+
+.modal-save:hover {
+  background-color: #23803f;
+}
+
+.modal-delete {
+  background-color: #c0261c;
+  color: white;
+}
+
+.modal-delete:hover {
+  background-color: #9d1e16;
+}
+
+@media (max-width: 600px) {
+  /* Dar ekranda iki sütun sığmaz: ad üstte, değer altta */
+  .modal-row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+    margin-bottom: 10px;
+  }
+}

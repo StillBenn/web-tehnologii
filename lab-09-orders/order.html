@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оформить заказ — Food Construct</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/lunch.css">
+  <!-- Kartların ve formun stilleri «Собрать ланч» sayfasıyla aynı (ödev: kartlar aynı biçimde), o yüzden aynı dosya -->
+</head>
+
+<body>
+  <header>
+    <h1>Food Construct</h1>
+    <nav>
+      <a href="index.html">О нас</a>
+      <a href="lunch.html">Собрать ланч</a>
+      <a href="order.html" id="active">Оформить заказ</a>
+      <!-- id="active": bulunduğumuz sayfa menüde turuncu -->
+      <a href="orders.html">Заказы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="order-dishes">
+      <!-- 1. bölüm: localStorage'daki id'lere göre seçilen yemeklerin kartları -->
+      <h2>Состав заказа</h2>
+
+      <p class="empty-order">
+        Ничего не выбрано. Чтобы добавить блюда в заказ, перейдите на страницу
+        <a href="lunch.html">Собрать ланч</a>.
+      </p>
+      <!-- Hiç yemek yokken görünen metin (ödevdeki metnin aynısı); yemek varsa script gizliyor -->
+
+      <div class="dishes"></div>
+      <!-- Kartları order.js çiziyor; «Добавить» yerine «Удалить» düğmesiyle -->
+    </section>
+
+    <section class="order">
+      <!-- 2. bölüm: «Собрать ланч» sayfasından taşınan sipariş formu -->
+      <h2>Оформление заказа</h2>
+
+      <form>
+        <!-- action yok: gönderimi tarayıcı değil order.js yapıyor (submit olayında preventDefault) -->
+
+        <div class="order-block">
+          <h3>Ваш заказ</h3>
+
+          <div class="order-summary">
+            <!-- Seçilen yemekler ve fiyatları; boş kategoride data-empty'deki metin yazılıyor.
+                 Ödev: «Не выбран», ana yemek için «Не выбрано» (Rusçada «блюдо» nötr cinsiyet) -->
+            <div class="chosen" data-category="soup" data-empty="Не выбран">
+              <p class="chosen-title">Суп</p>
+              <p class="chosen-dish"></p>
+            </div>
+            <div class="chosen" data-category="main-course" data-empty="Не выбрано">
+              <p class="chosen-title">Главное блюдо</p>
+              <p class="chosen-dish"></p>
+            </div>
+            <div class="chosen" data-category="salad" data-empty="Не выбран">
+              <p class="chosen-title">Салат/стартер</p>
+              <p class="chosen-dish"></p>
+            </div>
+            <div class="chosen" data-category="drink" data-empty="Не выбран">
+              <p class="chosen-title">Напиток</p>
+              <p class="chosen-dish"></p>
+            </div>
+            <div class="chosen" data-category="dessert" data-empty="Не выбран">
+              <p class="chosen-title">Десерт</p>
+              <p class="chosen-dish"></p>
+            </div>
+            <div class="chosen total">
+              <p class="chosen-title">Стоимость заказа</p>
+              <p class="chosen-price"></p>
+            </div>
+          </div>
+
+          <label for="comment">Комментарий к заказу</label>
+          <textarea id="comment" name="comment"></textarea>
+        </div>
+
+        <div class="customer-block">
+          <h3>Ваши данные</h3>
+          <!-- name'ler API'deki alan adlarıyla aynı (full_name, delivery_address...): FormData'dan
+               okunan değerler doğrudan siparişe yazılıyor -->
+
+          <label for="full_name">Имя</label>
+          <input type="text" id="full_name" name="full_name" required>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="subscribe" name="subscribe" value="1" checked>
+            <!-- API'de subscribe 0 ya da 1; işaretliyse 1 gider, değilse alan hiç gelmez → 0 -->
+            <label for="subscribe">Получать информацию о скидках и акциях</label>
+          </div>
+
+          <label for="phone">Номер телефона</label>
+          <input type="tel" id="phone" name="phone" required>
+
+          <label for="delivery_address">Адрес доставки</label>
+          <input type="text" id="delivery_address" name="delivery_address" required>
+          <p class="hint">Доставка осуществляется только по Москве</p>
+
+          <p class="radio-title">Время доставки:</p>
+          <div class="radio-row">
+            <input type="radio" id="now" name="delivery_type" value="now" required>
+            <!-- API değerleri: now = «как можно скорее», by_time = «к указанному времени» -->
+            <label for="now">Как можно скорее</label>
+          </div>
+          <div class="radio-row">
+            <input type="radio" id="by_time" name="delivery_type" value="by_time">
+            <label for="by_time">К указанному времени</label>
+          </div>
+
+          <label for="delivery_time">Укажите время доставки</label>
+          <input type="time" id="delivery_time" name="delivery_time" min="07:00" max="23:00" step="300">
+          <!-- step 300 saniye = 5 dakika; API de sadece 5 dakikalık adımları kabul ediyor -->
+          <p class="hint">Доступное время доставки с 7:00 до 23:00</p>
+
+          <div class="buttons">
+            <button type="reset">Сбросить</button>
+            <button type="submit">Отправить</button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer id="contacts">
+    <p>Позвонить нам <a href="tel:+70000000000">+7-000-000-00-00</a></p>
+  </footer>
+
+  <script src="scripts/api.js"></script>
+  <script src="scripts/storage.js"></script>
+  <script src="scripts/dish-card.js"></script>
+  <script src="scripts/validation.js"></script>
+  <script src="scripts/orders-api.js"></script>
+  <!-- Siparişi kaydeden "sunucu" (API kapalı olduğu için localStorage) -->
+  <script src="scripts/order.js"></script>
+  <!-- Bu sayfanın asıl script'i en sonda: yukarıdaki dosyalardaki fonksiyonları kullanıyor -->
+</body>
+
+</html>

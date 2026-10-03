@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Заказы — Food Construct</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <!-- Bootstrap Icons: göz, kalem, çöp kutusu ikonları (ödev: düğme yerine ikon kullanılabilir, örn. Bootstrap Icons) -->
+
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/lunch.css">
+  <!-- Bildirim kutusunun ve form alanlarının stilleri burada -->
+  <link rel="stylesheet" href="styles/orders.css">
+  <!-- Sadece bu sayfanın stilleri: tablo ve modal pencereler -->
+</head>
+
+<body>
+  <header>
+    <h1>Food Construct</h1>
+    <nav>
+      <a href="index.html">О нас</a>
+      <a href="lunch.html">Собрать ланч</a>
+      <a href="order.html">Оформить заказ</a>
+      <a href="orders.html" id="active">Заказы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="orders">
+      <h2>История заказов</h2>
+
+      <p class="empty-orders">
+        Заказов пока нет. Собрать свой ланч можно на странице <a href="lunch.html">Собрать ланч</a>.
+      </p>
+      <!-- Liste boşken görünür; sipariş varsa script gizliyor -->
+
+      <div class="table-wrap">
+        <!-- Telefonda 6 sütun sığmaz: tablo bu kutunun içinde yana kayar, sayfa kaymaz -->
+        <table class="orders-table">
+          <thead>
+            <!-- thead = başlık satırı, tbody = veriler. Ayrı olunca script sadece tbody'yi yeniden çiziyor -->
+            <tr>
+              <th>№</th>
+              <th>Дата оформления</th>
+              <th>Состав заказа</th>
+              <th>Стоимость</th>
+              <th>Время доставки</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacts">
+    <p>Позвонить нам <a href="tel:+70000000000">+7-000-000-00-00</a></p>
+  </footer>
+
+  <!-- ===== Modal pencereler (maket 2, 3, 4) =====
+       <dialog> = tarayıcının hazır pencere elemanı. showModal() ile açılınca arkasını karartır,
+       sayfanın geri kalanını tıklanamaz yapar ve Esc ile kapanır — bunları elle yazmaya gerek kalmıyor -->
+
+  <dialog class="modal" id="view-modal">
+    <div class="modal-header">
+      <h3>Просмотр заказа</h3>
+      <button type="button" class="modal-close" aria-label="Закрыть">&times;</button>
+      <!-- Sağ üstteki çarpı (ödev şartı). &times; = × işareti -->
+    </div>
+    <div class="modal-body"></div>
+    <!-- İçeriği script siparişe göre dolduruyor -->
+    <div class="modal-footer">
+      <button type="button" class="modal-button modal-ok">Ок</button>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="edit-modal">
+    <form class="edit-form">
+      <div class="modal-header">
+        <h3>Редактирование заказа</h3>
+        <button type="button" class="modal-close" aria-label="Закрыть">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-row">
+          <span>Дата оформления</span>
+          <span class="edit-date"></span>
+        </div>
+
+        <h4>Доставка</h4>
+        <!-- Düzenlenebilen alanlar ödevdeki listeyle aynı; name'ler API alan adları -->
+        <label class="modal-row">
+          <span>Имя получателя</span>
+          <input type="text" name="full_name" required autofocus>
+        </label>
+        <!-- autofocus: pencere açılınca imleç doğrudan bu alanda (yoksa tarayıcı çarpıya odaklanıyor) -->
+        <!-- label input'u sarıyor: yazıya tıklayınca alan seçilir, for/id gerekmez -->
+        <label class="modal-row">
+          <span>Адрес доставки</span>
+          <input type="text" name="delivery_address" required>
+        </label>
+        <div class="modal-row">
+          <span>Тип доставки</span>
+          <span class="radio-group">
+            <label><input type="radio" name="delivery_type" value="now"> Как можно скорее</label>
+            <label><input type="radio" name="delivery_type" value="by_time"> К указанному времени</label>
+          </span>
+        </div>
+        <label class="modal-row">
+          <span>Время доставки</span>
+          <input type="time" name="delivery_time" min="07:00" max="23:00" step="300">
+        </label>
+        <label class="modal-row">
+          <span>Телефон</span>
+          <input type="tel" name="phone" required>
+        </label>
+        <label class="modal-row">
+          <span>Email</span>
+          <input type="email" name="email" required>
+        </label>
+
+        <h4>Комментарий</h4>
+        <textarea name="comment" aria-label="Комментарий"></textarea>
+
+        <h4>Состав заказа</h4>
+        <div class="edit-dishes"></div>
+        <!-- Yemekler düzenlenemez, sadece gösteriliyor -->
+        <p class="modal-total"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="modal-button modal-cancel">Отмена</button>
+        <button type="submit" class="modal-button modal-save">Сохранить</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="modal modal-small" id="delete-modal">
+    <div class="modal-header">
+      <h3>Удаление заказа</h3>
+      <button type="button" class="modal-close" aria-label="Закрыть">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>Вы уверены, что хотите удалить заказ?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="modal-button modal-cancel">Отмена</button>
+      <button type="button" class="modal-button modal-delete">Да</button>
+    </div>
+  </dialog>
+
+  <script src="scripts/api.js"></script>
+  <script src="scripts/validation.js"></script>
+  <!-- Burada sadece showNotification için -->
+  <script src="scripts/orders-api.js"></script>
+  <script src="scripts/orders.js"></script>
+  <!-- Bu sayfanın asıl script'i en sonda -->
+</body>
+
+</html>

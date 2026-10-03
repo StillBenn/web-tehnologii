@@ -1,0 +1,206 @@
+/* ORTAK STİLLER — her iki sayfa da (ana sayfa + «Собрать ланч») bu dosyayı kullanır */
+
+/* Yıldız = sayfadaki istisnasız her eleman. Tarayıcıların hazır boşluklarını sıfırlamak için kullanılır */
+* {
+  margin: 0;               /* elemanın DIŞINDAKİ boşluk; tarayıcı p ve h1'e kendiliğinden verir, sıfırlayınca kontrol bizde olur */
+  padding: 0;              /* elemanın İÇİNDEKİ boşluk: kenarlık ile yazı arası */
+  box-sizing: border-box;  /* genişlik hesabı: 100px dersen iç boşluk+kenarlık dahil 100px olur, yoksa üstüne eklenip tasarım kayar */
+}
+
+/* Etiket seçici: nokta veya diyez yok, doğrudan etiket adı — sayfadaki tüm body'ye uygulanır */
+body {
+  margin: 50px 70px 0 70px;           /* dört değer saat yönünde: üst, sağ, alt, sol */
+  padding: 0;
+  font-family: "Manrope", sans-serif; /* yazı tipi; Manrope yüklenemezse sistemin çizgisiz fontuna düşer */
+  color: #111111;                     /* yazı rengi; içteki elemanlara miras geçer, tek tek yazmaya gerek kalmaz */
+  background-color: white;            /* sayfa zemini. Yazmazsak tarayıcı kendi varsayılanını kullanır ve
+                                         koyu tema açık olan bir bilgisayarda zemin siyah olur; siyah zemin
+                                         üstünde #111111 yazı okunmaz. Bu satır görüntüyü her yerde sabitler */
+
+  /* ÖDEVİN ŞARTI: içerik kısa kalsa bile footer sayfanın (ekranın) en altında dursun.
+     Bunu üç satırla çözüyoruz: */
+  min-height: calc(100vh - 50px);     /* 100vh = ekran yüksekliğinin tamamı. body en az bu kadar uzun olsun.
+                                         50px çıkarıyoruz çünkü yukarıdaki margin de yüksekliğe ekleniyor,
+                                         çıkarmazsak sayfa ekrandan taşar ve gereksiz kaydırma çubuğu çıkar */
+  display: flex;                      /* body'yi esnek kutuya çevirir: çocukları (header/main/footer) tek eksende dizilir */
+  flex-direction: column;             /* dizilim yönü: yan yana değil, alt alta */
+}
+
+header {
+  margin: 0 0 40px 0;   /* sadece alttan 40px: şapkayı içerikten ayırır */
+  padding: 0;
+}
+
+h1 {
+  font-size: 44px;      /* harflerin boyutu */
+  font-weight: 800;     /* harflerin kalınlığı: 400 normal, 700 bold, 800 daha kalın */
+  color: #000000;       /* onaltılık renk: ilk iki hane kırmızı, sonraki ikisi yeşil, son ikisi mavi */
+  margin-bottom: 50px;  /* başlık ile menü arasındaki mesafe */
+}
+
+nav {
+  /* ÖDEVİN ŞARTI: menü artık düz linkler değil, flexbox olacak — böylece aralarını ve
+     satıra sığmadıklarında ne olacağını tek yerden yönetebiliyoruz */
+  display: flex;        /* menüyü esnek kutuya çevirir; linkler otomatik yan yana dizilir */
+  gap: 15px;            /* flex elemanları ARASINDAKİ boşluk. margin'den farkı: ilk ve son elemanın
+                           dışına boşluk koymaz, sadece aralara koyar */
+  flex-wrap: wrap;      /* satıra sığmayan linkler alt satıra insin. Yazmazsak hepsini tek satıra
+                           sıkıştırmaya çalışır ve dar ekranda taşar */
+  margin: 0;
+  padding: 0;
+}
+
+/* Aradaki boşluk "içindeki" demek: sadece nav'ın içindeki linkler. Footer'daki link bundan etkilenmez */
+nav a {
+  font-family: "Manrope", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #000000;
+  text-decoration: none;  /* tarayıcı linkleri varsayılan olarak altı çizili gösterir, bu onu kaldırır */
+}
+
+/* :hover = fare üzerine geldiği andaki hâli. Kullanıcıya "burası tıklanabilir" hissini verir */
+nav a:hover {
+  color: #ff6b4a;
+}
+
+/* Diyez = id seçici. Sayfada id="active" olan TEK elemanı yakalar.
+   ÖDEVİN ŞARTI: bulunduğumuz sayfanın menü linki farklı renkte olsun ki kullanıcı nerede olduğunu görsün.
+   id seçicisi class'tan güçlüdür, bu yüzden yukarıdaki nav a rengini ezer */
+#active {
+  color: #ff6b4a;
+}
+
+main {
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;   /* body flex kutusu içinde artan boş yeri main yutsun.
+                     Sonuç: içerik kısa olsa bile main uzar ve footer aşağı itilir — istenen davranış bu */
+}
+
+section {
+  margin-bottom: 40px;  /* her bölümün altına aynı boşluk: sayfa düzenli görünür */
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 20px;  /* başlık ile altındaki içeriği ayırır */
+}
+
+/* Virgül: aynı kuralı iki seçiciye birden uygular, kodu iki kez yazmaktan kurtarır */
+p,
+li {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+/* Ana sayfadaki «О нас» bölümünün büyük fotoğrafı.
+   Sınıf verdik ki uyarlanabilirlik kurallarında sadece bu resmi hedefleyelim;
+   düz "img" yazsaydık ланч sayfasındaki yemek fotoğrafları da etkilenirdi */
+.about-photo {
+  width: 1120px;        /* resmin ekranda kaplayacağı genişlik */
+  height: 747px;        /* yüksekliği; ikisi birlikte maketteki oranı korur, resim ezilmez */
+  margin-bottom: 20px;
+}
+
+ul {
+  margin-left: 24px;    /* listeyi sağa kaydırır, yoksa madde noktaları sayfanın kenarına taşar */
+}
+
+table {
+  border: 1px solid #000000;  /* kenarlık üç değer alır: kalınlık, çizgi tipi, renk */
+  border-collapse: collapse;  /* komşu hücrelerin çizgilerini tek çizgide birleştirir; olmazsa her hücre kendi çizgisini çizer ve aralar çift görünür */
+}
+
+th,
+td {
+  padding: 16px 20px;         /* iki değer: ilki üst-alt, ikincisi sağ-sol. Yazı kenarlığa yapışmaz */
+  border: 1px solid #000000;  /* her hücrenin kendi kenarlığı — tablo ızgara gibi görünür */
+  text-align: center;         /* yazıyı hücrenin ortasına hizalar */
+  font-size: 18px;
+}
+
+footer {
+  margin: 60px -70px 0 -70px;  /* eksi değer elemanı dışarı taşırır: body'nin 70px boşluğunu iptal eder, footer kenardan kenara uzanır */
+  padding: 30px 70px;          /* iç boşluk; siyah zemin yazının etrafında nefes alır */
+  background-color: black;     /* arka plan rengi */
+  color: white;                /* siyah zeminde okunabilirlik için beyaz yazı */
+}
+
+footer a {
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+  color: white;           /* link de beyaz: koyu zeminde varsayılan mavi okunmaz */
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #ff6b4a;
+}
+
+/* ===================================================================
+   UYARLANABİLİRLİK (АДАПТИВНОСТЬ) — dar ekranlar için
+
+   @media = koşullu stil. İçindeki kurallar SADECE koşul doğruyken uygulanır.
+   max-width: 800px  ==  "ekran genişliği 800px veya daha az ise".
+   Sıralama önemli: önce 800, sonra 600, sonra 400 yazılır. Çünkü 500px'lik bir
+   ekranda hem 800 hem 600 bloğu doğrudur ve sonra yazılan öncekini ezer.
+   =================================================================== */
+
+/* --- TABLETLER: 800px ve altı --- */
+@media (max-width: 800px) {
+
+  nav {
+    justify-content: space-between;  /* ana eksende (burada yatay) dağıtım biçimi:
+                                        elemanlar arasına eşit boşluk koyar, ilk elemanın soluna
+                                        ve son elemanın sağına hiç boşluk koymaz — ödevin istediği bu */
+  }
+
+  h1 {
+    text-align: center;              /* yazıyı kendi kutusunun ortasına hizalar */
+  }
+
+  .about-photo {
+    width: 500px;                    /* büyük fotoğraf tablet ekranına sığsın */
+    height: auto;                    /* yüksekliği otomatik hesaplansın ki resim ezilmesin;
+                                        sabit 747px kalsaydı görüntü yamulurdu */
+  }
+}
+
+/* --- TELEFONLAR: 600px ve altı --- */
+@media (max-width: 600px) {
+
+  nav {
+    flex-direction: column;   /* menü artık yan yana değil alt alta: dar ekranda linkler sıkışmasın */
+    align-items: center;      /* YARDIMCI eksende hizalama. Yön "column" olduğu için ana eksen
+                                 dikey, yardımcı eksen yataydır — yani linkler ortalanır */
+  }
+
+  nav a {
+    font-size: 24px;          /* ödev "linklerin fontunu 4px büyüt" diyor: 20px + 4px = 24px.
+                                 Parmakla dokunulacağı için büyük olması iyi */
+  }
+
+  .about-photo {
+    width: 100%;              /* yüzde = kapsayıcı kutunun genişliğinin oranı.
+                                 %100 = ekranın izin verdiği kadar, hep tam oturur */
+    height: auto;
+  }
+
+  th,
+  td {
+    font-size: 16px;          /* ödev "tablo yazısını 2px küçült" diyor: 18px - 2px = 16px */
+  }
+}
+
+/* --- ÇOK DAR TELEFONLAR: 400px ve altı --- */
+@media (max-width: 400px) {
+
+  th,
+  td {
+    font-size: 14px;          /* ödev "2px daha küçült" diyor: 16px - 2px = 14px.
+                                 Amaç: tablo yatay kaydırma çubuğu çıkmadan ekrana sığsın */
+  }
+}
