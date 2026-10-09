@@ -79,10 +79,12 @@ document.querySelectorAll('.filters').forEach(function (filters) {
 // ----- 3. Yemek seçme -----
 
 // Tıklanan yemeği kendi kategorisine yazar; aynı kategoriden ikinci seçim öncekinin yerine geçer.
+// Zaten seçili yemeğe tekrar tıklanırsa seçim kalkar — sipariş sayfasına gitmeden vazgeçilebilsin.
 // ЛР8: her seçimden sonra id'ler localStorage'a yazılıyor — sayfa yenilense de seçim kaybolmaz
 function selectDish(keyword) {
   const dish = dishes.find(function (item) { return item.keyword === keyword; });
-  order[dish.category] = dish;
+  const alreadySelected = order[dish.category] !== null && order[dish.category].id === dish.id;
+  order[dish.category] = alreadySelected ? null : dish;
   saveOrder(order);
   markSelected();
   updatePanel();
@@ -94,6 +96,8 @@ function markSelected() {
     const dish = dishes.find(function (item) { return item.keyword === card.dataset.dish; });
     const isSelected = order[dish.category] !== null && order[dish.category].id === dish.id;
     card.classList.toggle('selected', isSelected);       // ikinci parametre true → ekle, false → kaldır
+    // Düğme yazısı da seçimi söylesin: sadece renk değişince "eklendi mi?" belli olmuyordu
+    card.querySelector('button').textContent = isSelected ? 'Выбрано ✓' : 'Добавить';
   });
 }
 
